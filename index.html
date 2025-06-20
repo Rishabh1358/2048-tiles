@@ -2,44 +2,170 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>2048-Tiles Play And Enjoy</title>
-
+  <title>2048-tiles</title> <!-- Changed title -->
   <link href="style/main.css" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
-  <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone 5+ -->
-  <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x920.png"  media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone, retina -->
+  <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
+  <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x920.png"  media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+  <style>
+    /* === Custom Color Changes === */
+    body {
+      background: #f0f4f8; /* Light blue-gray */
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .container {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      padding: 30px 20px 20px 20px;
+      margin: 40px auto;
+      max-width: 450px;
+    }
+    .heading {
+      background: linear-gradient(90deg, #007aff 60%, #00c6fb 100%);
+      border-radius: 12px;
+      color: #fff;
+      padding: 20px 0 15px 0;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .title {
+      font-size: 48px;
+      font-weight: 800;
+      margin: 0;
+      letter-spacing: 3px;
+    }
+    .scores-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 8px;
+    }
+    .score-container, .best-container {
+      background: #222c3e;
+      color: #fff;
+      border-radius: 9px;
+      padding: 10px 18px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .above-game {
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .game-intro strong {
+      color: #007aff;
+    }
+    .restart-button {
+      background: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background 0.2s;
+      margin-top: 10px;
+      display: inline-block;
+    }
+    .restart-button:hover {
+      background: #005bb5;
+    }
+    .game-container {
+      background: #e2eafc;
+      border-radius: 16px;
+      padding: 18px;
+      margin: 0 auto 18px auto;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+    }
+    .grid-container {
+      margin-bottom: 18px;
+    }
+    .grid-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .grid-cell {
+      width: 60px;
+      height: 60px;
+      background: #bcdff1;
+      border-radius: 7px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .tile-container {
+      min-height: 20px;
+    }
+    .game-message {
+      color: #007aff;
+      text-align: center;
+      font-size: 20px;
+    }
+    .game-message .lower a {
+      background: #fff;
+      color: #007aff;
+      border: 1px solid #007aff;
+      border-radius: 5px;
+      padding: 7px 14px;
+      margin: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s;
+    }
+    .game-message .lower a:hover {
+      background: #007aff;
+      color: #fff;
+    }
+    /* === Footer & Logo === */
+    footer {
+      text-align: center;
+      font-size: 15px;
+      margin-top: 30px;
+      color: #666;
+      padding-bottom: 20px;
+    }
+    .copilot-logo {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 7px;
+      height: 22px;
+    }
+    .logo-text {
+      font-weight: 700;
+      color: #007aff;
+      letter-spacing: 1px;
+      vertical-align: middle;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <div class="heading">
-      <h1 class="title">2048</h1>
+      <h1 class="title">2048-tiles</h1> <!-- Updated heading -->
       <div class="scores-container">
         <div class="score-container">0</div>
         <div class="best-container">0</div>
       </div>
     </div>
-
     <div class="above-game">
       <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
       <a class="restart-button">New Game</a>
     </div>
-
     <div class="game-container">
       <div class="game-message">
         <p></p>
         <div class="lower">
-	        <a class="keep-playing-button">Keep going</a>
+          <a class="keep-playing-button">Keep going</a>
           <a class="retry-button">Try again</a>
         </div>
       </div>
-
       <div class="grid-container">
         <div class="grid-row">
           <div class="grid-cell"></div>
@@ -66,26 +192,32 @@
           <div class="grid-cell"></div>
         </div>
       </div>
-
-      <div class="tile-container">
-
-      </div>
+      <div class="tile-container"></div>
     </div>
-
-   
-  <script src="js/bind_polyfill.js"></script>
-  <script src="js/classlist_polyfill.js"></script>
-  <script src="js/animframe_polyfill.js"></script>
-  <script src="js/keyboard_input_manager.js"></script>
-  <script src="js/html_actuator.js"></script>
-  <script src="js/grid.js"></script>
-  <script src="js/tile.js"></script>
-  <script src="js/local_storage_manager.js"></script>
-  <script src="js/game_manager.js"></script>
-  <script src="js/application.js"></script>
-<footer style="text-align:center; font-size:14px; margin-top:30px; color:#777;">
-  Original 2048 by <span style="text-decoration:underline; cursor:default;">Gabriele Cirulli</span> — MIT License
-</footer>
-
+    <!-- Scripts -->
+    <script src="js/bind_polyfill.js"></script>
+    <script src="js/classlist_polyfill.js"></script>
+    <script src="js/animframe_polyfill.js"></script>
+    <script src="js/keyboard_input_manager.js"></script>
+    <script src="js/html_actuator.js"></script>
+    <script src="js/grid.js"></script>
+    <script src="js/tile.js"></script>
+    <script src="js/local_storage_manager.js"></script>
+    <script src="js/game_manager.js"></script>
+    <script src="js/application.js"></script>
+    <!-- Footer with logo and attribution -->
+    <footer>
+      <span class="logo-text">
+        <svg class="copilot-logo" viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" fill="#007aff"/>
+          <ellipse cx="9" cy="12" rx="2" ry="3" fill="#fff"/>
+          <ellipse cx="15" cy="12" rx="2" ry="3" fill="#fff"/>
+        </svg>
+        GitHub Copilot Chat Assistant
+      </span>
+      <br>
+      Original 2048 by <span style="text-decoration:underline; cursor:default;">Gabriele Cirulli</span> — MIT License
+    </footer>
+  </div>
 </body>
 </html>
